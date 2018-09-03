@@ -27,7 +27,6 @@ trap exit_cleanup EXIT
 echo 'Locations'
 echo 'original place '$orig_place
 echo 'Auto documentation folder '$rep_loc_ad
-echo 'General folder '$rep_loc_gen
 echo 'Target folder '$rep_loc
 
 # Now check out the code.
@@ -46,10 +45,12 @@ module load matlab/R2016a
 
 cat <<EOF >$temp_dir/exec.m
 orig_path=path;
-addpath $rep_loc_ad/Auto_documentation;
+addpath $rep_loc_ad/matlab-dependency-analysis;
+addpath $rep_loc_ad/matlab-dependency-analysis/support_files
 core_paths = get_core_paths($inhouse);
 path(core_paths);
-addpath $rep_loc_ad/Auto_documentation;
+addpath $rep_loc_ad/matlab-dependency-analysis;
+addpath $rep_loc_ad/matlab-dependency-analysis/support_files;
 addpath $rep_loc;
 update_codebase_dependencies('$rep_loc', $out_dir, $out_web, $inhouse);
 path(orig_path);
