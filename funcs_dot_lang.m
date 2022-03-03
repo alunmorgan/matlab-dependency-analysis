@@ -27,7 +27,8 @@ for nw = 1:length(nodes)
     cols_used = unique(cols_used);
     place_names ='';
     for ehf = 1:length(cols_used)
-        unique_loc =  unique_paths{find_position_in_cell_lst(strfind(cols, cols_used{ehf}(2:end)))};
+        unique_loc = unique_paths{find_position_in_cell_lst(strfind(cols, cols_used{ehf}(2:end)))};
+        unique_loc = regexprep(unique_loc, 'Root/rep[0-9]+/','') 
         inst{end+1,1} = ['"', unique_loc,...
             '"[fillcolor="',cols_used{ehf},'", style=filled,len=0, shape=box];'];
         if ehf == 1
